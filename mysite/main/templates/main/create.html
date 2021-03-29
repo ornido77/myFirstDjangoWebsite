@@ -1,10 +1,14 @@
 {% extends 'main/base.html' %}
 {% block title %}Add Note{% endblock %}
 {% block content %}
-Create New Notes
-<form method="post", action="/create/">
+<h3>Create a Record</h3>
+<form method="post", action="/create/", class="form-group">
     {% csrf_token %}
-    {{varForm.as_p}}
-    <button type="submit", name="save">Save</button>
+    <div class="input-group mb-3">
+        <div class="input-group-prepend">
+            <button type="submit", name="save", class="btn btn-success">Save</button>
+        </div>
+        {{varForm.name}}
+    </div>
 </form>
 {% endblock %}

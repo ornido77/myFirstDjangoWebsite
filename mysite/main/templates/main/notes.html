@@ -3,6 +3,30 @@
 {% block title %}Notes{% endblock %}
 
 {% block content %}
-    <h1>View Notes</h1>
-    <p>{{varNote}}</p>
+    <h2>View Notes</h2>
+    <h1>{{varName}}</h1>
+    <form method="post" action="#">
+        {% csrf_token %}
+        {% for item in varName.notes_set.all %}
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <div class="input-group-text">
+                    {% if item.complete == True %}
+                    <input type="checkbox", value="clicked", name="c{{item.id}}" checked>
+                    {% else %}
+                    <input type="checkbox", value="clicked", name="c{{item.id}}">
+                    {% endif %}
+                </div>
+            </div>
+                <input type="text", value="{{item.text}}", class="form-control">
+        </div>
+        {% endfor %}
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+                <button type="submit", name="new", value="new" class="btn btn-success">Add Note</button>
+            </div>
+            <input type="text", name="newNote">
+        </div>
+        <button type="submit", name="save", value="name" class="btn btn-success">Save</button>
+    </form>
 {% endblock %}
